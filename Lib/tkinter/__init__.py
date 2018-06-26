@@ -69,6 +69,8 @@ def _stringify(value):
         value = str(value)
         if not value:
             value = '{}'
+        elif value[0] == '"':
+            value = '{%s}' % _magic_re.sub(r'\\\1', value)
         elif _magic_re.search(value):
             # add '\' before special characters and spaces
             value = _magic_re.sub(r'\\\1', value)
